@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagentoBoy
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ *
+ * @category   MagentoBoy
+ * @package    MagentoBoy_DBAutoBackup
+ * @copyright  Copyright (c) 2011 MagentoBoy (http://www.magentoboy.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <MagentoBoy_DBAutoBackup>
+            <version>0.1.0</version>
+        </MagentoBoy_DBAutoBackup>
+    </modules>
+
+    <global>
+        <models>
+            <dbautobackup>
+                <class>MagentoBoy_DBAutoBackup_Model</class>
+            </dbautobackup>
+        </models>
+        <helpers>
+            <dbautobackup>
+                <class>MagentoBoy_DBAutoBackup_Helper</class>
+            </dbautobackup>
+        </helpers>
+        <template>
+            <email>
+                <system_dbautobackup_error_email_template translate="label" module="dbautobackup">
+                    <label>DB Auto Backup Warnings</label>
+                    <file>db_auto_backup_warning.html</file>
+                    <type>text</type>
+                </system_dbautobackup_error_email_template>
+            </email>
+        </template>
+    </global>
+
+    <default>
+        <system>
+            <dbautobackup>
+                <enabled>0</enabled>
+                <time></time>
+                <frequency>D</frequency>
+                <error_email></error_email>
+                <error_email_identity>general</error_email_identity>
+                <error_email_template>system_dbautobackup_error_email_template</error_email_template>
+            </dbautobackup>
+        </system>
+    </default>
+
+    <crontab>
+        <jobs>
+            <dbautobackup>
+                <run>
+                    <model>dbautobackup/cron::backupDatabse</model>
+                </run>
+            </dbautobackup>
+        </jobs>
+    </crontab>
+</config>
